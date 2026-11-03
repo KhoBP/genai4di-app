@@ -25,3 +25,64 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.badge-green {
+  display: inline-block;
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  border-radius: 9999px;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.badge-amber {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  border-radius: 9999px;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.badge-red {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  border-radius: 9999px;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.uncertainty-block {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0.5rem 0;
+}
+.uncertainty-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+.uncertainty-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.badge-inactive {
+  display: inline-block;
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 400;
+}

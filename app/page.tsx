@@ -2,6 +2,30 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+
+function renderWithBadges(text: string): string {
+  const badgeBlock = (active: string) => {
+    const levels = [
+      { key: 'Well-supported', cls: 'badge-green' },
+      { key: 'Limited evidence', cls: 'badge-amber' },
+      { key: 'Insufficient evidence', cls: 'badge-red' },
+    ];
+    const pills = levels.map(l =>
+      l.key === active
+        ? `<span class="${l.cls}">${l.key}</span>`
+        : `<span class="badge-inactive">${l.key}</span>`
+    ).join(' ');
+    return `<div class="uncertainty-block"><span class="uncertainty-label">Confidence Level</span><div class="uncertainty-pills">${pills}</div></div>`;
+  };
+
+  return text
+       .replace(/UNCERTAINTY:\s*Well-supported/g, badgeBlock('Well-supported'))
+    .replace(/UNCERTAINTY:\s*Limited evidence/g, badgeBlock('Limited evidence'))
+    .replace(/UNCERTAINTY:\s*Insufficient evidence/g, badgeBlock('Insufficient evidence'))
+    .replace(/(Query Classification|Direct Answer|Clinical Evidence and Details|Malaysia MOH Context[^:]*|Caveats and Monitoring|Uncertainty Level|Verification Checklist|References)[:.]/g, '<strong>$1:</strong>');
+  }
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -77,7 +101,9 @@ export default function Home() {
               Response
             </h2>
             <div className="prose prose-sm max-w-none text-gray-800">
-              <ReactMarkdown>{response}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+  {renderWithBadges(response)}
+</ReactMarkdown>
             </div>
           </div>
         )}
