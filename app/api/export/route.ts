@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient, createServerClient } from '@/lib/supabase'
+import { createAdminClient, createServerClient } from '@/lib/supabase-server'
 
 function escapeCell(value: unknown): string {
   if (value === null || value === undefined) return ''

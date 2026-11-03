@@ -127,7 +127,12 @@ export default function Home() {
   const [error,      setError]      = useState("");
   const [userEmail,  setUserEmail]  = useState<string | null>(null);
 
-  const sessionId = useRef<string>(crypto.randomUUID());
+    const sessionIdRef = useRef<string>('')
+  useEffect(() => {
+    if (!sessionIdRef.current) {
+      sessionIdRef.current = crypto.randomUUID()
+    }
+  }, [])
   const supabase  = createBrowserClient();
 
   useEffect(() => {
@@ -154,7 +159,7 @@ export default function Home() {
       const res = await fetch("/api/drug-info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, sessionId: sessionId.current }),
+        body: JSON.stringify({ query, sessionId: sessionIdRef.current }),
       });
 
       const data = await res.json();

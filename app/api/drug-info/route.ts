@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient, createServerClient } from "@/lib/supabase";
+import { createAdminClient, createServerClient } from "@/lib/supabase-server";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 export const maxDuration = 60;
